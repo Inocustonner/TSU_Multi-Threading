@@ -27,20 +27,20 @@ void quicksort_task() {
 }
 
 void integral_task_trapezoidal() {
-    printf("\x9F(x) = sin(x)*x^2, with x, y: float\n");
+    printf("\x9F(x) = sin(x) + x^2, with x, y: double\n");
     auto a = readv<double>("enter start: ");
     auto b = readv<double>("enter end: ");
     auto intervals = readv<unsigned int>("enter number of intervals: ");
-    auto f = [](double x) -> double { return sin(x) * x * x; };
+    auto f = [](double x) -> double { return sin(x) + x * x; };
     printf("%6.2f\n   \xDA\n   \xB3\x9F = %f\n   \xD9\n%6.2f\n\n", b, integral_trapezoidal<double>(f, a, b, intervals), a);
 }
 
 void integral_task_recursive() {
-    printf("\x9F(x) = sin(x)*x^2, with x, y: float\n");
+    printf("\x9F(x) = sin(x) + x^2, with x, y: double\n");
     auto a = readv<double>("enter start: ");
     auto b = readv<double>("enter end: ");
     auto epsilon = readv<double>("enter epsilon: ");
-    auto f = [](double x) -> double { return sin(x) * x * x; };
+    auto f = [](double x) -> double { return sin(x) + x * x; };
     printf("%6.2f\n   \xDA\n   \xB3\x9F = %f\n   \xD9\n%6.2f\n\n", b, integral_recursive<double>(f, a, b, epsilon), a);
 }
 
