@@ -18,7 +18,7 @@ void quicksort_task() {
     printf("sorting\n");
     auto bench = benchmark([arr]() { quicksort(arr); });
 
-    printf("quicksort | %d elements | %f ms | %s\n\n",
+    printf("quicksort \t| %d elements \t| %f ms \t| %s\n\n",
            n,
            bench.average,
            std::is_sorted(arr.cbegin(), arr.cend()) ? "sorted" : "not sorted");
@@ -44,25 +44,36 @@ void integral_task_recursive() {
     printf("%6.2f\n   \xDA\n   \xB3\x9F = %f\n   \xD9\n%6.2f\n\n", b, integral_recursive<double>(f, a, b, epsilon), a);
 }
 
-// kinda bad, but it ok in this case
-int main() {
-    // std::srand(std::time(nullptr));
-    // bool run = true;
-    // choice choices{};
-    // choices
-    //     .add_branch("run quicksort", quicksort_task)
-    //     .add_branch("run integral calculation(trapezoidal)", integral_task_trapezoidal)
-    //     .add_branch("run integral calculation(recursive)", integral_task_recursive)
-    //     .add_branch("bench quicksort st vs mt", quicksort_bench)
-    //     .add_branch("stop", [&run]() { run = false; });
+void radix_task() {
+    int n = readv<int>("enter number of elements: ");
+    int *input = new int[n];
 
-    // while (run)
-    //     choices.branch("Choose what to do"); 
-
-    int test[16000];
-    span<int> arr(test);
+    auto arr = span<int>(input, n);
+    printf("populating with random elements\n");
     populate(arr);
-    radix_msd(arr);
-    printf("%s", std::is_sorted(arr.cbegin(), arr.cend()) ? "sorted": "not sorted");
-    // for (auto v: arr) printf("%d ", v);
+    printf("sorting\n");
+    auto bench = benchmark([arr]() { radix_msd(arr); });
+
+    printf("radix sort \t| %d elements \t| %f ms \t| %s\n\n",
+           n,
+           bench.average,
+           std::is_sorted(arr.cbegin(), arr.cend()) ? "sorted" : "not sorted");
+
+    delete[] input;
+}
+
+int main() {
+    std::srand(std::time(nullptr));
+    bool run = true;
+    choice choices{};
+    choices
+        .add_branch("run quicksort", quicksort_task)
+        .add_branch("run radix sort", radix_task)
+        .add_branch("run integral calculation(trapezoidal)", integral_task_trapezoidal)
+        .add_branch("run integral calculation(recursive)", integral_task_recursive)
+        .add_branch("bench quicksort st vs mt", quicksort_bench)
+        .add_branch("stop", [&run]() { run = false; });
+
+    while (run)
+        choices.branch("Choose what to do"); 
 }

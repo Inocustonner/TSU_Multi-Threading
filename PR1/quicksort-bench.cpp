@@ -69,7 +69,7 @@ void quick_sort_multi_threaded(span<T> arr) {
 
 void populate(span<int> arr) {
     for (int& v: arr) {
-        v = std::rand() % 1000;
+        v = std::rand();
     }
 }
 
