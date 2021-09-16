@@ -4,4 +4,6 @@
 *.pdf
 *.exe
 *.dll
+*.zip
+*.7z
 .vs

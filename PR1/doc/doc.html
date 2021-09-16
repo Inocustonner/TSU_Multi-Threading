@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Практическая работа 1</title>
+    <style>
+        .right-text {
+            text-align: right;
+        }
+        .center-text {
+            text-align: center;
+        }
+        figcaption {
+            font-size: 0.83em;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <address class="author right-text">Егор Сивохин <br> ПМИб-1902б</address>
+        <h1 class="center-text">Практическая работа 1</h1>
+    </header>
+    <main>
+        <section id="intro">
+            Программа используемая в этой практике приложена. <br>
+            Visual Studio проект с кодом доступен по ссылке <a href="https://github.com/Inocustonner/TSU_Multi-Threading">https://github.com/Inocustonner/TSU_Multi-Threading</a>. <br>
+            Для подготовки были использованы <tt>Visual Studio 19</tt> и <tt>clang</tt> компилятор.
+        </section>
+        <section id="goal">
+            <h2>Цель</h2>
+            <p>
+                Подготовить алгоритмы и программный код для реализации параллельных алгоритмов
+            </p>
+        </section>
+        <section id="2">
+            <h2>Задание 2.</h2>
+            <p>
+                Написать программу реализующую расчет интеграла рекурсивным методом и методом трапеции. Ниже представлен файл содержащий оба метода.
+                <ul>
+                    <li> integral_trapezoidal - метод трапеции</li>
+                    <li> integral_recursive - метод рекурсии</li>
+                </ul>
+                <script src="https://emgithub.com/embed.js?target=https%3A%2F%2Fgithub.com%2FInocustonner%2FTSU_Multi-Threading%2Fblob%2Fmaster%2FPR1%2Fintegral_calc.hpp&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on&showCopy=on"></script>
+                <figure class="center-text">
+                    <img src="./trapezoidal.png" alt="missing">
+                    <figcaption>Результат выполнения используя метод трапеции.</figcaption>
+                </figure>
+                <figure class="center-text">
+                    <img src="./recursive.png" alt="missing">
+                    <figcaption>Результат выполнения используя метод рекурсии.</figcaption>
+                </figure>
+                <h3>Проверка с использованием сайта <a href="https://www.desmos.com/calculator/">desmos.com</a></h3>
+                <figure class="center-text">
+                    <img src="./integral-check.png" alt="missing">
+                    <figcaption>Скриншот с сайта. Формулы введены вручную.</figcaption>
+                </figure>
+                Значения сходятся, следовательно алгоритмы верны.
+            </p>
+        </section>
+        <section id="4">
+            <h2>Задание 4.</h2>
+            <p>
+                Написать программу реализующую быструю сортировку(quicksort). 
+            </p>
+            <p> 
+                Ниже представлен файл содержащий алгоритм.
+                <script src="https://emgithub.com/embed.js?target=https%3A%2F%2Fgithub.com%2FInocustonner%2FTSU_Multi-Threading%2Fblob%2Fmaster%2FPR1%2Fquicksort.hpp&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on&showCopy=on"></script>
+            </p>
+            <h3>Ниже приведен пример исполнения</h3>
+            <figure class="center-text">
+                <img src="./quicksort.png" alt="missing">
+            </figure>
+            <h3>Детали имплементации</h3>
+            <p>
+                Главной особенностью этой версии <tt>quicksort</tt> является использование <code>std::nth_element</code>. <code>std::nth_element</code> - алгоритм, который находит k-наименьший элемент, но также в <tt>C++</tt> у него есть <tt>side effect</tt>, после его использования элементы идущие до k'того гарантированно будут не больше k'того. Например, если применить алгоритм на массиве <code>{9, 8, 7, 6, 5, 4, 3, 2, 1}</code> с <code>k=5</code> получится массив <code>{3, 1, 4, 2, 5, 6, 9, 7, 8}</code>. Сложность <code>std::nth_element</code> O(n) <sup><a href="https://www.cplusplus.com/reference/algorithm/nth_element/">источник</a></sup>. Таким образом мне не придется делать дополнительную сортировку отсортированных половин. Также я использую <tt>shake sort</tt> для сортировки не больших массивов.
+            </p>
+            <p> 
+                Я использую структуру <code>span<int></code>, которая в своей сути содержит указатель на массв и его длинну, также обладает вспомогательными функциями. Подробнее с ней можно ознакомится <a href="https://github.com/Inocustonner/TSU_Multi-Threading/blob/master/helpers/span.hpp">тут</a>.
+            </p>
+            <p>
+                Заполение массива просиходит с использованием функции <code id="populate">populate</code>.
+                <script src="https://emgithub.com/embed.js?target=https%3A%2F%2Fgithub.com%2FInocustonner%2FTSU_Multi-Threading%2Fblob%2F008da461fbd1eb92de27c03b35c13058eac7617a%2FPR1%2Fquicksort-bench.cpp%23L70-L74&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on&showCopy=on"></script>
+                Проверка осуществляется автоматически с использованием функции <code>std::is_sorted</code>.
+            </p>
+            <h3>Полный код заполнения, исполнения и проверки</h3>
+            <script src="https://emgithub.com/embed.js?target=https%3A%2F%2Fgithub.com%2FInocustonner%2FTSU_Multi-Threading%2Fblob%2F008da461fbd1eb92de27c03b35c13058eac7617a%2FPR1%2Fmain.cpp%23L11-L27&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on&showCopy=on"></script>
+        </section>
+        <section id="5">
+            <h2>Задание 5</h2>
+            <p>
+                Написать программу реализующую radix сортировку(radix sort) использующую двоичное представление чисел, и способную адаптироваться к длине любого целочисленного типа.
+                В данной имплементации я использую версию radix sort most significant digit, это значит что я начинаю сортировать со старших битов и иду к нижним.
+            </p>
+            <p>
+                Ниже представлен код
+                <script src="https://emgithub.com/embed.js?target=https%3A%2F%2Fgithub.com%2FInocustonner%2FTSU_Multi-Threading%2Fblob%2Fcbc6ad89b248a514bbb0e33deb22e59e4ab35b47%2FPR1%2Fradix.hpp%23L6-L35&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on&showCopy=on"></script>
+            </p>
+            <p>
+                Основные требования:
+                <ul>
+                    <li>
+                        Алгоритм должен адаптироваться к длинне любого целочисленного типа - в этой имплементации это достигается с использованием <code>template&lt;typename T&gt;</code>
+                    </li>
+                    <li>
+                        Алгоритм должен использовать двоичное представление чисел - достигается с использованием <em>двоичной маски</em>, одноименная переменная <code>mask</code>
+                    </li>
+                </ul>
+            </p>
+            <h3>Пример работы алгоритма</h3>
+            <p>
+                <figure>
+                    <img src="./radix sort.png" alt="missing">
+                </figure>
+            </p>
+            <h3>Проверка</h3>
+            <p>
+                Каждый запуск массив заполняется случайными числами с помощью функции <code>populate</code>(<a href="#populate">код приводился выше</a>).
+                Проверка работы алгоритма осуществляется с помощью функции <code>std::is_sorted</code>.
+                Код функции заполнения, запуска и проверки:
+                <script src="https://emgithub.com/embed.js?target=https%3A%2F%2Fgithub.com%2FInocustonner%2FTSU_Multi-Threading%2Fblob%2Fcbc6ad89b248a514bbb0e33deb22e59e4ab35b47%2FPR1%2Fmain.cpp%23L47-L63&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on&showCopy=on"></script>
+            </p>
+        </section>
+        <summary>
+            <b>Вывод:</b> в ходе работы подготовлены алгоритмы и программный код для реализации параллельных алгоритмов
+        </summary>
+    </main>
+</body>
+</html>
