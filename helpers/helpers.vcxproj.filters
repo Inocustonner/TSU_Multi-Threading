@@ -21,9 +21,15 @@
     <ClInclude Include="span.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="choice.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="helpers.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="choice.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

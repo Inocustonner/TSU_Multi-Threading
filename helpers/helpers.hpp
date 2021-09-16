@@ -24,3 +24,19 @@ template<typename F, typename FBefore>
     info.average = aggregate / iterations;
     return info;
 }
+
+template<typename F>
+[[ nodiscard ]] auto benchmark(F f, int iterations) {
+    return benchmark(f, [](){}, iterations);
+}
+
+template<typename F>
+[[ nodiscard ]] auto benchmark(F f) {
+    return benchmark(f, [](){}, 1);
+}
+
+template<typename T>
+T readv(const char* msg);
+
+// int read_int(const char* msg);
+// float read_float(const char* msg);

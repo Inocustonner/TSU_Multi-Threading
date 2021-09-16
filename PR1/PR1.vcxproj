@@ -169,6 +169,16 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="quicksort-bench.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="integral_calc.hpp" />
+    <ClInclude Include="quicksort.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\helpers\helpers.vcxproj">
+      <Project>{65e9fe5f-106d-4ad4-8bf5-ee9e86e3390d}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
