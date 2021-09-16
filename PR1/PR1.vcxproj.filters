@@ -29,5 +29,8 @@
     <ClInclude Include="integral_calc.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="radix.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

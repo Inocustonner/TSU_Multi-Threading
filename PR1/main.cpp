@@ -1,5 +1,6 @@
 #include "quicksort.hpp"
 #include "integral_calc.hpp"
+#include "radix.hpp"
 #include <chrono>
 #include <helpers/choice.hpp>
 #include <helpers/helpers.hpp>
@@ -45,16 +46,23 @@ void integral_task_recursive() {
 
 // kinda bad, but it ok in this case
 int main() {
-    std::srand(std::time(nullptr));
-    bool run = true;
-    choice choices{};
-    choices
-        .add_branch("run quicksort", quicksort_task)
-        .add_branch("run integral calculation(trapezoidal)", integral_task_trapezoidal)
-        .add_branch("run integral calculation(recursive)", integral_task_recursive)
-        .add_branch("bench quicksort st vs mt", quicksort_bench)
-        .add_branch("stop", [&run]() { run = false; });
+    // std::srand(std::time(nullptr));
+    // bool run = true;
+    // choice choices{};
+    // choices
+    //     .add_branch("run quicksort", quicksort_task)
+    //     .add_branch("run integral calculation(trapezoidal)", integral_task_trapezoidal)
+    //     .add_branch("run integral calculation(recursive)", integral_task_recursive)
+    //     .add_branch("bench quicksort st vs mt", quicksort_bench)
+    //     .add_branch("stop", [&run]() { run = false; });
 
-    while (run)
-        choices.branch("Choose what to do");
+    // while (run)
+    //     choices.branch("Choose what to do"); 
+
+    int test[16000];
+    span<int> arr(test);
+    populate(arr);
+    radix_msd(arr);
+    printf("%s", std::is_sorted(arr.cbegin(), arr.cend()) ? "sorted": "not sorted");
+    // for (auto v: arr) printf("%d ", v);
 }
